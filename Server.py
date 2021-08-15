@@ -5,14 +5,14 @@ app = Flask(__name__)
 api= Api(app)
 
 cpu_put_args = reqparse.RequestParser()
-cpu_put_args.add_argument("cpuUsage",type=str,help="The Cpu Usage")
+cpu_put_args.add_argument("cpuUsage",type=float,help="The Cpu Usage")
 cpuu = {}
 class home(Resource):
     def get(self):
         return "Test Ramy"
 class cpu(Resource):
     def get (self,cpu_id):
-        return cpu[cpu_id]
+        return cpuu[cpu_id]
     def put(self,cpu_id):
         args=cpu_put_args.parse_args()
         cpuu[cpu_id]=args
