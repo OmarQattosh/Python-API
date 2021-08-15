@@ -13,7 +13,7 @@ class home(Resource):
 class cpu(Resource):
     def get (self,cpu_id):
         return cpuu[cpu_id]
-    def put(self,cpu_id):
+    def post(self,cpu_id):
         args=cpu_put_args.parse_args()
         cpuu[cpu_id]=args
         return cpuu[cpu_id],201
@@ -25,3 +25,12 @@ api.add_resource(cpu,"/cpu/<int:cpu_id>")
 #api.add_resource(cpu,"/cpu")
 if __name__=="__main__":
     app.run(debug=True)
+    '''
+    CREATE DATABASE cpu ;
+    USE cpu ;
+    CREATE TABLE CPU {
+        
+    };
+    
+    
+    '''
