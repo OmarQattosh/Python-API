@@ -12,13 +12,13 @@ api= Api(app)
 cpuu = {}
 ramm = {}
 class cpu(Resource):
-    def get (self,cpu_id):
+    def post (self,cpu_id):
         cpuu[cpu_id]={"cpuUsage":psutil.cpu_percent(4)}
         return cpuu[cpu_id],200
     
 class ram(Resource):
-    def get(self,ram_id):
-        ramm[ram_id]={"Current Ram Usage":psutil.virtual_memory()[2]}
+    def post(self,ram_id):
+        ramm[ram_id]={"Current_Ram_Usage":psutil.virtual_memory()[2]}
 
         return ramm[ram_id],200
 
