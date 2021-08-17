@@ -8,17 +8,14 @@ import requests
 import psycopg2 
 from psycopg2 import Error
 import datetime
-import connection.py as co
-co.conn
+import connection as con
+import logformat as lg 
 
-connection= psycopg2.connect(user="postgres",
-                                password="lama159852357",
-                                host="127.0.0.1",
-                                port="5432",
-                                database="test.db")
+lg.logging()
+
+connection= con.connect()
 cursor= connection.cursor()
 
-ramy= input("press 1 to get the CPU USAGE  and 2 for ram ")
 Base="http://127.0.0.1:5000/"
 global cpu_id,ram_id
 cpu_id=1
@@ -47,17 +44,9 @@ def getRam(ram_id):
     return
 schedule.every(16).seconds.do(getCpu,cpu_id)    
 schedule.every(30).seconds.do(getRam,ram_id)
-print(ramy)
 while True:
-    if ramy=="1":        
-       
-        schedule.run_pending()
-        
-    elif ramy=="2":
-        print("hi")
-        
-    else:
-        print("пошел на хуй")
+    schedule.run_pending()
+
 
 
 

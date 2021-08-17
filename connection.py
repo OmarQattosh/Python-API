@@ -16,4 +16,4 @@ def connect():
                                 host=host,
                                 port=port,
                                 database=dbase)
-    return
+    return connection
