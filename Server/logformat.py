@@ -1,6 +1,6 @@
 import logging
-def formatlog():
-    logging.basicConfig(filename='Server/log.log',filemode='w',format='%(name)s - %(levelname)s - %(message)s')
+def formatlog(filename):
+    logging.basicConfig(filename=f'{filename}',filemode='w',format='%(name)s - %(levelname)s - %(message)s')
     return
 
 def logwarn():

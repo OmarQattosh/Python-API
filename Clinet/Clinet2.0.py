@@ -2,12 +2,13 @@ from flask import Flask,request
 from flask.wrappers import Request, Response
 from flask_restful import Api,Resource, reqparse
 import requests
+import sys
+sys.path.insert(1,r'C:\Users\OmarQ\Desktop\PROJECT\Server')
 import psutil
+import logformat as lg
+lg.formatlog('Clinet/log.log')
 app = Flask(__name__)
 api= Api(app)
-#print('RAM memory % used:', psutil.virtual_memory()[2])
-#cpu_put_args = reqparse.RequestParser()
-#cpu_put_args.add_argument("CPU time",type=int,help="The Cpu Usage")
 
 cpuu = {}
 ramm = {}
@@ -19,7 +20,6 @@ class cpu(Resource):
 class ram(Resource):
     def post(self,ram_id):
         ramm[ram_id]={"Current_Ram_Usage":psutil.virtual_memory()[2]}
-
         return ramm[ram_id],200
 
 
