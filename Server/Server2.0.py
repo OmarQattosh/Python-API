@@ -8,10 +8,11 @@ import requests
 import psycopg2 
 from psycopg2 import Error
 import datetime
+import sys
+sys.path.insert(1,r'C:\Users\OmarQ\Desktop\PROJECT')
 import connection as con
 import logformat as lg 
-
-lg.logging()
+#lg.logging()
 
 connection= con.connect()
 cursor= connection.cursor()
@@ -29,7 +30,7 @@ def insertFunction(val,id,database):
 def getCpu(cpu_id):
     response= requests.post(Base+f"cpu/{cpu_id}")
     cpu_id+=1 
-    print(response.json()['cpuUsage'])
+    print(response.json())
     insertFunction(response.json()['cpuUsage'],cpu_id,"cpu")
     now = datetime.datetime.now()
     print(now.minute,now.second)
