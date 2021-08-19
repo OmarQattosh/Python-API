@@ -15,3 +15,7 @@ def succRet():
 
 def failRet():
     logging.error('Post Request Failed......')
+
+def loger():
+    logging.error("Failed Request......")
+    return

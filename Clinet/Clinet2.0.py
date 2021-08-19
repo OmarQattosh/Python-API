@@ -1,9 +1,9 @@
-from flask import Flask,request
+from flask import Flask,request, jsonify
 from flask.wrappers import Request, Response
 from flask_restful import Api,Resource, reqparse
 import requests
-import sys
-sys.path.insert(1,r'C:\Users\OmarQ\Desktop\PROJECT\Server')
+import sys, os
+sys.path.append(os.path.join(os.path.dirname(sys.path[0]),'Server'))
 import psutil
 import logformat as lg
 lg.formatlog('Clinet/log.log')
@@ -12,20 +12,36 @@ api= Api(app)
 
 cpuu = {}
 ramm = {}
-class cpu(Resource):
-    def post (self,cpu_id):
-        cpuu[cpu_id]={"cpuUsage":psutil.cpu_percent(4)}
-        return cpuu[cpu_id],200
+
+@app.route("/")
+def home():
+    return "HomePage"
+@app.route("/cpu/",methods=['GET', 'POST'])
+def cpu():
+    if request.method == "GET":
+        return {"cpuUsage":psutil.cpu_percent(4)}
+    elif request.method =="POST":
+        return jsonify({"cpuUsage":psutil.cpu_percent(4)})   
+    return"hi"
+@app.route("/ram/",methods=['GET','POST'])
+def ram():
+    if request.method == "GET":
+        return {"Current_Ram_Usage":psutil.virtual_memory()[2]}
+    elif request.method =="POST":
+        return jsonify({"Current_Ram_Usage":psutil.virtual_memory()[2]})   
+    return lg.loger()
     
-class ram(Resource):
-    def post(self,ram_id):
-        ramm[ram_id]={"Current_Ram_Usage":psutil.virtual_memory()[2]}
-        return ramm[ram_id],200
 
-
-api.add_resource(cpu,"/cpu/<int:cpu_id>")
-api.add_resource(ram,"/ram/<int:ram_id>")
-#api.add_resource(cpu,"/cpu")
 if __name__=="__main__":
-    app.run(debug=True)
   
+    app.run(debug=True)
+ 
+ 
+ 
+ 
+ 
+ 
+""" class cpu(Resource):
+        def post (self,cpu_id):
+            cpuu[cpu_id]={"cpuUsage":psutil.cpu_percent(4)}
+            return cpuu[cpu_id],200 """
