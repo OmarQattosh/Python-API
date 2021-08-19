@@ -4,14 +4,12 @@ from flask_restful import Api,Resource, reqparse
 import requests
 import sys, os
 sys.path.append(os.path.join(os.path.dirname(sys.path[0]),'Server'))
+
 import psutil
 import logformat as lg
 lg.formatlog('Clinet/log.log')
 app = Flask(__name__)
 api= Api(app)
-
-cpuu = {}
-ramm = {}
 
 @app.route("/")
 def home():
@@ -40,8 +38,3 @@ if __name__=="__main__":
  
  
  
- 
-""" class cpu(Resource):
-        def post (self,cpu_id):
-            cpuu[cpu_id]={"cpuUsage":psutil.cpu_percent(4)}
-            return cpuu[cpu_id],200 """

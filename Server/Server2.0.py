@@ -8,9 +8,9 @@ import requests
 import psycopg2 
 from psycopg2 import Error
 import datetime
-import sys
-sys.path.insert(1,r'C:\Users\OmarQ\Desktop\PROJECT')
-import DataBase.connection as con
+import sys, os
+sys.path.append(os.path.join(os.path.dirname(sys.path[0]),'DataBase'))
+import connection as con
 import logformat as lg 
 lg.formatlog('desktop/PROJECT/Server/log.log')
 
@@ -40,7 +40,7 @@ class Server():
         print(now.minute,now.second)
         return
     def getRam(ram_id):
-        response=requests.post(BASE+f"/ram/")
+        response=requests.post(BASE+f"ram/")
         if response.status_code == 404:
             lg.failRet()
         ram_id+=1
